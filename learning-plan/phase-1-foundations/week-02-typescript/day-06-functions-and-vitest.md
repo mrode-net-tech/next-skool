@@ -83,6 +83,6 @@ Add `subtract(a, b)` and `divide(a, b)`. Make `divide` throw on `b === 0`. Add t
 - [TS — Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Checklist
-- [ ] `npm test` shows passing tests
-- [ ] You wrote at least 4 assertions
-- [ ] You tested an error case with `toThrow`
+- [x] `npm test` shows passing tests
+- [x] You wrote at least 4 assertions
+- [x] You tested an error case with `toThrow`
