@@ -7,7 +7,7 @@ Use this file to track which days you have completed.
 ## Phase 1 — Foundations
 
 ### Week 1 — Setup
-- [ ] Day 1 — Install tools
+- [x] Day 1 — Install tools
 - [ ] Day 2 — First Node project
 - [ ] Day 3 — IDE tips for JS/TS (PhpStorm/WebStorm)
 - [ ] Day 4 — Add TypeScript
