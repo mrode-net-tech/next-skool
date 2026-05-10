@@ -1,5 +1,5 @@
-function greet(name: string): string {
-  return `Hello, ${name}!`;
+function greet(name: string, surname: string): string {
+  return `Hello, ${name} ${surname}!`;
 }
 
-console.log(greet('Marcin'));
+console.log(greet('Marcin', 'Foik'));

@@ -11,7 +11,7 @@ Use this file to track which days you have completed.
 - [x] Day 2 — First Node project
 - [x] Day 3 — IDE tips for JS/TS (PhpStorm/WebStorm)
 - [x] Day 4 — Add TypeScript
-- [ ] Day 5 — npm scripts and watch mode
+- [x] Day 5 — npm scripts and watch mode
 
 ### Week 2 — TypeScript + first tests
 - [ ] Day 6 — Functions and types + first Vitest test

@@ -83,6 +83,6 @@ Introduce an unused variable, run `npm run lint`, see the warning. Then prefix i
 - [Prettier docs](https://prettier.io/docs/en/)
 
 ## Checklist
-- [ ] `npm run dev:watch` re-runs on save
-- [ ] `npm run lint` works
-- [ ] `npm run format` works
+- [x] `npm run dev:watch` re-runs on save
+- [x] `npm run lint` works
+- [x] `npm run format` works
