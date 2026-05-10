@@ -82,6 +82,6 @@ Make `greet` accept an optional `greeting: string` parameter (default `'Hello'`)
 - [tsx](https://github.com/privatenumber/tsx)
 
 ## Checklist
-- [ ] `npm run dev` runs the `.ts` file
-- [ ] `npm run build` produces `dist/`
-- [ ] `strict: true` enabled
+- [x] `npm run dev` runs the `.ts` file
+- [x] `npm run build` produces `dist/`
+- [x] `strict: true` enabled
