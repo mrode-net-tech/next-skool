@@ -8,7 +8,7 @@ Use this file to track which days you have completed.
 
 ### Week 1 — Setup
 - [x] Day 1 — Install tools
-- [ ] Day 2 — First Node project
+- [x] Day 2 — First Node project
 - [ ] Day 3 — IDE tips for JS/TS (PhpStorm/WebStorm)
 - [ ] Day 4 — Add TypeScript
 - [ ] Day 5 — npm scripts and watch mode
