@@ -97,7 +97,7 @@ Open yesterday's `nauka-node` project in the IDE and:
 - [JetBrains shortcut reference (PDF)](https://resources.jetbrains.com/storage/products/webstorm/docs/WebStorm_ReferenceCard.pdf)
 
 ## Checklist
-- [ ] Node interpreter set
-- [ ] ESLint + Prettier auto-configured
-- [ ] You ran `npm start` from the IDE
-- [ ] You hit a breakpoint with the debugger
+- [x] Node interpreter set
+- [x] ESLint + Prettier auto-configured
+- [x] You ran `npm start` from the IDE
+- [x] You hit a breakpoint with the debugger
