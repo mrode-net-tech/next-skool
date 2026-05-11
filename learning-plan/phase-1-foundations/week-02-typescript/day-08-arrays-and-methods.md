@@ -84,5 +84,5 @@ Write `groupByDone(tasks)` returning `{ done: Task[]; pending: Task[] }`. Test i
 - [MDN — Array methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
 ## Checklist
-- [ ] You used `map`, `filter`, `reduce`, `every`
-- [ ] All tests pass
+- [x] You used `map`, `filter`, `reduce`, `every`
+- [x] All tests pass

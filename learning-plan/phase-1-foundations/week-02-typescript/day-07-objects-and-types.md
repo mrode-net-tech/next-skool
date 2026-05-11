@@ -65,5 +65,5 @@ Add a function `isAdmin(u: User): boolean` and tests for both roles.
 - [TS — type vs interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
 
 ## Checklist
-- [ ] You used both `type` and `interface`
-- [ ] Tests pass
+- [x] You used both `type` and `interface`
+- [x] Tests pass
