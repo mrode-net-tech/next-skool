@@ -5,16 +5,22 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^25.6.2",
+    "eslint": "^10.3.0",
+    "prettier": "^3.8.3",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2",
     "vitest": "^4.1.5"
   }
 }

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import {group, titles, pending, highestPriority, allDone, type Task, GroupOfTasks} from '../tasks';
+import { group, titles, pending, highestPriority, allDone, type Task } from '../tasks';
 
 const sample: Task[] = [
   { id: '1', title: 'A', done: false, priority: 2 },
-  { id: '2', title: 'B', done: true,  priority: 1 },
+  { id: '2', title: 'B', done: true, priority: 1 },
   { id: '3', title: 'C', done: false, priority: 3 },
 ];
 
@@ -30,5 +30,5 @@ describe('tasks', () => {
       pending: [sample[0], sample[2]],
       done: [sample[1]],
     });
-  })
+  });
 });

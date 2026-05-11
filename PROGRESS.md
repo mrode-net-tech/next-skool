@@ -18,7 +18,7 @@ Use this file to track which days you have completed.
 - [x] Day 7 — Objects and type aliases
 - [x] Day 8 — Arrays and methods
 - [x] Day 9 — async/await
-- [ ] Day 10 — Recap exercise
+- [x] Day 10 — Recap exercise
 
 ### Week 3 — Express + tests
 - [ ] Day 11 — Install Express

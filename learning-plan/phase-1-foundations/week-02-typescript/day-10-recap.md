@@ -84,6 +84,6 @@ No new terms today.
 - [Vitest — expect](https://vitest.dev/api/expect.html)
 
 ## Checklist
-- [ ] At least 6 passing tests
-- [ ] You used a class, types, async, and array methods
-- [ ] Code committed and pushed
+- [x] At least 6 passing tests
+- [x] You used a class, types, async, and array methods
+- [x] Code committed and pushed
