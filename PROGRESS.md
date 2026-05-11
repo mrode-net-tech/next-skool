@@ -16,8 +16,8 @@ Use this file to track which days you have completed.
 ### Week 2 — TypeScript + first tests
 - [x] Day 6 — Functions and types + first Vitest test
 - [x] Day 7 — Objects and type aliases
-- [ ] Day 8 — Arrays and methods
-- [ ] Day 9 — async/await
+- [x] Day 8 — Arrays and methods
+- [x] Day 9 — async/await
 - [ ] Day 10 — Recap exercise
 
 ### Week 3 — Express + tests

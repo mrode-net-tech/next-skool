@@ -70,6 +70,6 @@ Write `fetchGreetings(names: string[])` that returns greetings **in parallel** w
 - [MDN — async / await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
 ## Checklist
-- [ ] You used `async/await`
-- [ ] You tested both resolve and reject
-- [ ] You used `Promise.all` once
+- [x] You used `async/await`
+- [x] You tested both resolve and reject
+- [x] You used `Promise.all` once
