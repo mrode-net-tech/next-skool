@@ -90,7 +90,7 @@ Add `PATCH /tasks/:id/done` that flips `done` to `true`. Status codes: `200` on 
 - [Express — res object](https://expressjs.com/en/api.html#res)
 
 ## Checklist
-- [ ] POST returns 201 + the created task
-- [ ] DELETE returns 204
-- [ ] Validation returns 400
-- [ ] PATCH /tasks/:id/done works
+- [x] POST returns 201 + the created task
+- [x] DELETE returns 204
+- [x] Validation returns 400
+- [x] PATCH /tasks/:id/done works

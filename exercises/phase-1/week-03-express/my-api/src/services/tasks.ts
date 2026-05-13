@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 export interface Task {
   id: string;
   title: string;
@@ -32,6 +34,41 @@ export class TaskStore {
 
   find(id: string): Task | undefined {
     return this.tasks.get(id);
+  }
+
+  add(title: string): Task {
+    const task: Task = {
+      id: randomUUID(),
+      title: title,
+      done: false,
+    };
+
+    this.tasks.set(task.id, task);
+
+    return task;
+  }
+
+  remove(id: string): void {
+    const task: Task | undefined = this.tasks.get(id);
+
+    if (!task) {
+      throw new Error(`Task with id ${id} not found`);
+    }
+
+    this.tasks.delete(id);
+  }
+
+  markDone(id: string): Task {
+    const task: Task | undefined = this.tasks.get(id);
+
+    if (!task) {
+      throw new Error(`Task with id ${id} not found`);
+    }
+
+    task.done = true;
+    this.tasks.set(task.id, task);
+
+    return task;
   }
 }
 

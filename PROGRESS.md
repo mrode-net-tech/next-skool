@@ -23,7 +23,7 @@ Use this file to track which days you have completed.
 ### Week 3 — Express + tests
 - [x] Day 11 — Install Express
 - [x] Day 12 — HTTP client + JSON
-- [ ] Day 13 — POST + req.body
+- [x] Day 13 — POST + req.body
 - [ ] Day 14 — Zod validation
 - [ ] Day 15 — Folder structure + Supertest
 

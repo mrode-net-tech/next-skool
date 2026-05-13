@@ -9,3 +9,18 @@ Accept: application/json
 ### get one (replace :id)
 GET http://localhost:3000/tasks/7b74b565-f386-4edc-9e40-77d1da68dbe
 Accept: application/json
+
+### create
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+  "title": "Some task"
+}
+
+### mark done
+PATCH http://localhost:3000/tasks/59553be6-8ce9-4da4-92ed-e7ab492359ce/done
+Content-Type: application/json
+
+### delete (paste id from the create response)
+DELETE http://localhost:3000/tasks/59553be6-8ce9-4da4-92ed-e7ab492359ce
