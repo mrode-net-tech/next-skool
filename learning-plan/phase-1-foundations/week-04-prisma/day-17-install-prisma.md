@@ -21,7 +21,7 @@ npm i @prisma/client
 npx prisma init --datasource-provider postgresql
 ```
 
-This creates `prisma/schema.prisma` and adds `DATABASE_URL` to `.env`. Replace its contents:
+This creates `prisma/schema.prisma`, `prisma.config.ts`, and adds `DATABASE_URL` to `.env`. In Prisma 7, the connection URL lives in `prisma.config.ts`; keep only the provider in `schema.prisma`:
 
 ```prisma name=prisma/schema.prisma
 generator client {
@@ -30,14 +30,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 ```
 
 Verify connectivity:
 ```bash
 npx prisma db pull
-# expected: "P1003: Database my_api does not contain any tables" — connection works.
+# expected: "P4001 The introspected database was empty" — connection works.
 ```
 
 Create a singleton client:
@@ -66,6 +65,6 @@ Add a script `"db:studio": "prisma studio"` and run it (`npm run db:studio`) —
 - [Prisma + Postgres quickstart](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql)
 
 ## Checklist
-- [ ] `prisma init` ran successfully
-- [ ] `prisma db pull` connects
-- [ ] `prisma studio` opens
+- [x] `prisma init` ran successfully
+- [x] `prisma db pull` connects
+- [x] `prisma studio` opens
