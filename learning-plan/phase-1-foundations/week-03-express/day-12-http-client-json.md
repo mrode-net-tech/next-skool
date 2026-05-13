@@ -91,6 +91,6 @@ Add a `?done=true|false` query filter to `GET /tasks`.
 - [Bruno](https://www.usebruno.com/)
 
 ## Checklist
-- [ ] You can list and fetch tasks via `.http` file
-- [ ] 404 returned for unknown id
-- [ ] Optional filter works
+- [x] You can list and fetch tasks via `.http` file
+- [x] 404 returned for unknown id
+- [x] Optional filter works
