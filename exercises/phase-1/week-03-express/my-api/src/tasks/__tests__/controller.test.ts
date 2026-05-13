@@ -1,17 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { createApp } from '@app';
 
-import { taskStore } from '../store';
-
-let app = createApp();
-
-beforeEach(() => {
-  taskStore.reset();
-  app = createApp();
-});
+const app = createApp();
 
 describe('tasks API', () => {
   it('lists empty initially', async () => {
@@ -38,6 +31,20 @@ describe('tasks API', () => {
 
     const marked = await request(app).patch(`/tasks/${created.body.id}/done`);
     expect(marked.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  it('creates and updates and marks as done', async () => {
+    const created = await request(app)
+      .post('/tasks')
+      .send({ title: 'Buy milk', priority: 1 });
+
+    const updated = await request(app)
+      .put(`/tasks/${created.body.id}`)
+      .send({ title: 'Buy milk changed', priority: 2, done: true });
+    expect(updated.status).toBe(StatusCodes.ACCEPTED);
+    expect(updated.body.title).toBe('Buy milk changed');
+    expect(updated.body.priority).toBe(2);
+    expect(updated.body.done).toBe(true);
   });
 
   it('rejects invalid input', async () => {

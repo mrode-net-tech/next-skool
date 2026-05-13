@@ -1,4 +1,7 @@
-import { type Priority, taskStore } from './store';
+import { prismaTaskRepository as taskStore } from '@tasks/prisma.repository';
+import { type Priority } from '@tasks/repository';
+
+// import { taskStore } from './store';
 
 export const taskService = {
   list(filter?: { done?: boolean }) {
@@ -11,6 +14,10 @@ export const taskService = {
 
   create(title: string, priority: Priority) {
     return taskStore.add(title, priority);
+  },
+
+  update(id: string, title: string, priority: Priority, done: boolean) {
+    return taskStore.update(id, title, priority, done);
   },
 
   remove(id: string) {

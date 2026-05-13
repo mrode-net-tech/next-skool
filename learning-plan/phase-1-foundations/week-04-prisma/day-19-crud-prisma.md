@@ -119,6 +119,6 @@ Add `PATCH /tasks/:id` accepting `{ title?, done?, priority? }`. Validate with Z
 - [Vitest — setupFiles](https://vitest.dev/config/#setupfiles)
 
 ## Checklist
-- [ ] All previous tests pass against Postgres
-- [ ] Test DB is wiped between tests
-- [ ] `PATCH /tasks/:id` works and is tested
+- [x] All previous tests pass against Postgres
+- [x] Test DB is wiped between tests
+- [x] `PATCH /tasks/:id` works and is tested

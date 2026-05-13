@@ -1,61 +1,62 @@
 import { randomUUID } from 'node:crypto';
 
-export type Priority = 1 | 2 | 3;
+import { Priority, Task, TaskRepository } from '@tasks/repository';
 
-export interface Task {
-  id: string;
-  title: string;
-  done: boolean;
-  priority: Priority;
-}
-
-export class TaskStore {
+export class TaskStore implements TaskRepository {
   private tasks: Map<string, Task> = new Map<string, Task>();
 
   constructor(initial: Task[] = []) {
     initial.forEach((task) => this.tasks.set(task.id, task));
   }
 
-  reset(): void {
+  reset(): Promise<void> {
     this.tasks.clear();
+    return Promise.resolve();
   }
 
-  list(filter?: { done?: boolean }): Task[] {
+  list(filter?: { done?: boolean }): Promise<Task[]> {
     const tasks = Array.from(this.tasks.values());
-    if (!filter || filter.done === undefined) return tasks;
-    return tasks.filter((task) => task.done === filter.done);
+    if (!filter || filter.done === undefined) return Promise.resolve(tasks);
+    return Promise.resolve(tasks.filter((task) => task.done === filter.done));
   }
 
-  find(id: string): Task | undefined {
-    return this.tasks.get(id);
+  find(id: string): Promise<Task | null> {
+    const task = this.tasks.get(id);
+
+    if (!task) return Promise.resolve(null);
+
+    return Promise.resolve(task);
   }
 
-  add(title: string, priority: Priority): Task {
+  add(title: string, priority: Priority): Promise<Task> {
     const task: Task = {
       id: randomUUID(),
       title,
       done: false,
       priority,
     };
+
     this.tasks.set(task.id, task);
-    return task;
+
+    return Promise.resolve(task);
   }
 
-  remove(id: string): void {
+  remove(id: string): Promise<boolean> {
     if (!this.tasks.has(id)) {
       throw new Error(`Task with id ${id} not found`);
     }
     this.tasks.delete(id);
+    return Promise.resolve(true);
   }
 
-  markDone(id: string): Task {
+  markDone(id: string): Promise<Task> {
     const task = this.tasks.get(id);
     if (!task) {
       throw new Error(`Task with id ${id} not found`);
     }
     task.done = true;
     this.tasks.set(task.id, task);
-    return task;
+    return Promise.resolve(task);
   }
 }
 

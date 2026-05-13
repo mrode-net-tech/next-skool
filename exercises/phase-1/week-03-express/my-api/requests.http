@@ -7,7 +7,7 @@ GET http://localhost:3000/tasks?done=true
 Accept: application/json
 
 ### get one (replace :id)
-GET http://localhost:3000/tasks/7b74b565-f386-4edc-9e40-77d1da68dbe
+GET http://localhost:3000/tasks/cmp497mqm0001ybnxbhhdcs7g
 Accept: application/json
 
 ### create
@@ -20,8 +20,8 @@ Content-Type: application/json
 }
 
 ### mark done
-PATCH http://localhost:3000/tasks/59553be6-8ce9-4da4-92ed-e7ab492359ce/done
+PATCH http://localhost:3000/tasks/cmp49i1sl0000qgnx8524wgp0/done
 Content-Type: application/json
 
 ### delete (paste id from the create response)
-DELETE http://localhost:3000/tasks/59553be6-8ce9-4da4-92ed-e7ab492359ce
+DELETE http://localhost:3000/tasks/cmp49i1sl0000qgnx8524wgp0

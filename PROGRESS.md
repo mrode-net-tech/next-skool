@@ -31,7 +31,7 @@ Use this file to track which days you have completed.
 - [x] Day 16 — Postgres via Docker
 - [x] Day 17 — Install Prisma
 - [x] Day 18 — First model + migration
-- [ ] Day 19 — CRUD with Prisma
+- [x] Day 19 — CRUD with Prisma
 - [ ] Day 20 — Relations + integration tests
 
 ## Phase 2 — Backend Advanced
