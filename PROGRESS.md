@@ -25,7 +25,7 @@ Use this file to track which days you have completed.
 - [x] Day 12 — HTTP client + JSON
 - [x] Day 13 — POST + req.body
 - [x] Day 14 — Zod validation
-- [ ] Day 15 — Folder structure + Supertest
+- [x] Day 15 — Folder structure + Supertest
 
 ### Week 4 — Prisma + tests
 - [ ] Day 16 — Postgres via Docker

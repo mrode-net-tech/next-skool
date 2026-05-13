@@ -156,6 +156,6 @@ Add `TaskStore.reset()`, call it in `beforeEach`. Confirm tests are independent.
 - [Express — Router](https://expressjs.com/en/api.html#router)
 
 ## Checklist
-- [ ] At least 4 passing Supertest tests
-- [ ] App and server are split
-- [ ] Folder structure refactored
+- [x] At least 4 passing Supertest tests
+- [x] App and server are split
+- [x] Folder structure refactored

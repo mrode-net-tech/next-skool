@@ -13,11 +13,9 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@controllers/*": ["./src/controllers/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@schemas/*": ["./src/schemas/*"],
-      "@services/*": ["./src/services/*"],
-      "@middleware/*": ["./src/middleware/*"]
+      "@app": ["./src/app"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@tasks/*": ["./src/tasks/*"]
     }
   },
   "include": ["src/**/*"]

@@ -24,11 +24,9 @@ export default [
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           pathGroups: [
-            { pattern: '@controllers/**', group: 'internal' },
-            { pattern: '@routes/**', group: 'internal' },
-            { pattern: '@services/**', group: 'internal' },
+            { pattern: '@app', group: 'internal' },
+            { pattern: '@tasks/**', group: 'internal' },
             { pattern: '@middleware/**', group: 'internal' },
-            { pattern: '@schemas/**', group: 'internal' },
           ],
           pathGroupsExcludedImportTypes: ['builtin'],
           alphabetize: { order: 'asc', caseInsensitive: true },

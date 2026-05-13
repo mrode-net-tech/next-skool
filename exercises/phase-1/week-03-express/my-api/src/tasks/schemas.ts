@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { type Priority } from '@services/tasks';
+import { type Priority } from './store';
 
 const PRIORITIES = [1, 2, 3] as const satisfies Priority[];
 
