@@ -57,6 +57,6 @@ Add a `description String?` (nullable) field, run `npx prisma migrate dev --name
 - [Prisma schema reference](https://www.prisma.io/docs/orm/prisma-schema)
 
 ## Checklist
-- [ ] Migration created in `prisma/migrations/`
-- [ ] DB has a `Task` table (verify in Studio)
-- [ ] You added a second migration
+- [x] Migration created in `prisma/migrations/`
+- [x] DB has a `Task` table (verify in Studio)
+- [x] You added a second migration

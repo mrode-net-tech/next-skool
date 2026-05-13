@@ -5,3 +5,16 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  done        Boolean  @default(false)
+  priority    Int      @default(2)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@index([done])
+  @@map("tasks")
+}

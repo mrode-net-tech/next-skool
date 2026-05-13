@@ -30,7 +30,7 @@ Use this file to track which days you have completed.
 ### Week 4 — Prisma + tests
 - [x] Day 16 — Postgres via Docker
 - [x] Day 17 — Install Prisma
-- [ ] Day 18 — First model + migration
+- [x] Day 18 — First model + migration
 - [ ] Day 19 — CRUD with Prisma
 - [ ] Day 20 — Relations + integration tests
 
