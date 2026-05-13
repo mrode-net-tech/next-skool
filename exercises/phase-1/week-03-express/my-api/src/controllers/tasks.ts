@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { StatusCodes } from 'http-status-codes';
+
+import { CreateTaskBody } from '@schemas/task';
 import { taskStore } from '@services/tasks';
 
 interface TaskQuery {
@@ -11,7 +13,7 @@ export function getTasks(
   req: Request<ParamsDictionary, unknown, unknown, TaskQuery>,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
     let filter: { done: boolean } | undefined;
     if (req.query.done === 'true') filter = { done: true };
@@ -26,7 +28,7 @@ export function getTask(
   req: Request<{ id: string }>,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
     const t = taskStore.find(req.params.id);
     if (!t) {
@@ -40,17 +42,12 @@ export function getTask(
 }
 
 export function addTask(
-  req: Request,
+  req: Request<ParamsDictionary, unknown, CreateTaskBody>,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
-    const { title } = req.body ?? {};
-    if (typeof title !== 'string' || title.trim() === '') {
-      res.status(StatusCodes.BAD_REQUEST).json({ error: 'title required' });
-      return;
-    }
-    const t = taskStore.add(title.trim());
+    const t = taskStore.add(req.body.title, req.body.priority);
     res.status(StatusCodes.CREATED).json(t);
   } catch (err) {
     next(err);
@@ -61,7 +58,7 @@ export function deleteTask(
   req: Request<{ id: string }>,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
     taskStore.remove(req.params.id);
     res.status(StatusCodes.NO_CONTENT).send();
@@ -74,7 +71,7 @@ export function markTaskDone(
   req: Request<{ id: string }>,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
     taskStore.markDone(req.params.id);
     res.status(StatusCodes.NO_CONTENT).send();

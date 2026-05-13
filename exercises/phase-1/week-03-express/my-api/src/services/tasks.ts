@@ -1,14 +1,27 @@
 import { randomUUID } from 'node:crypto';
 
+export type Priority = 1 | 2 | 3;
+
 export interface Task {
   id: string;
   title: string;
   done: boolean;
+  priority: Priority;
 }
 
 const tasks: Task[] = [
-  { id: '7b74b565-f386-4edc-9e40-77d1da68dbe', title: 'Learn Express', done: false },
-  { id: '67b08005-4619-4441-a21b-08d0ddc90916', title: 'Drink coffee', done: true },
+  {
+    id: '7b74b565-f386-4edc-9e40-77d1da68dbe',
+    title: 'Learn Express',
+    done: false,
+    priority: 1,
+  },
+  {
+    id: '67b08005-4619-4441-a21b-08d0ddc90916',
+    title: 'Drink coffee',
+    done: true,
+    priority: 2,
+  },
 ];
 
 export class TaskStore {
@@ -36,11 +49,12 @@ export class TaskStore {
     return this.tasks.get(id);
   }
 
-  add(title: string): Task {
+  add(title: string, priority: Priority): Task {
     const task: Task = {
       id: randomUUID(),
       title: title,
       done: false,
+      priority: priority,
     };
 
     this.tasks.set(task.id, task);

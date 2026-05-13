@@ -24,7 +24,7 @@ Use this file to track which days you have completed.
 - [x] Day 11 — Install Express
 - [x] Day 12 — HTTP client + JSON
 - [x] Day 13 — POST + req.body
-- [ ] Day 14 — Zod validation
+- [x] Day 14 — Zod validation
 - [ ] Day 15 — Folder structure + Supertest
 
 ### Week 4 — Prisma + tests

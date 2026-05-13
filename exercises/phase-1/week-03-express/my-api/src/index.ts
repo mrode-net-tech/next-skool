@@ -1,8 +1,9 @@
 import express from 'express';
+
+import { errorHandler } from '@middleware/error-handler';
 import healthRouter from '@routes/health';
 import homeRouter from '@routes/home';
 import taskRouter from '@routes/tasks';
-import { errorHandler } from '@middleware/error-handler';
 
 const app = express();
 app.use(express.json());

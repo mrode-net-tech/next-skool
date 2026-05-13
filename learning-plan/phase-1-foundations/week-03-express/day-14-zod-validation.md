@@ -91,6 +91,6 @@ Add a `priority: z.union([z.literal(1), z.literal(2), z.literal(3)]).default(2)`
 - [Zod docs](https://zod.dev/)
 
 ## Checklist
-- [ ] Invalid POST returns 400 with `details`
-- [ ] `validateBody` middleware reused on at least one route
-- [ ] You used `z.infer`
+- [x] Invalid POST returns 400 with `details`
+- [x] `validateBody` middleware reused on at least one route
+- [x] You used `z.infer`
