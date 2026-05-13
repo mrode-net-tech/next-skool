@@ -76,6 +76,6 @@ Connect to the DB with any client (DataGrip, `psql`, TablePlus). Confirm `my_api
 - [Postgres image](https://hub.docker.com/_/postgres)
 
 ## Checklist
-- [ ] `docker compose up -d` works
-- [ ] You can connect to both DBs
-- [ ] `.env` is gitignored
+- [x] `docker compose up -d` works
+- [x] You can connect to both DBs
+- [x] `.env` is gitignored

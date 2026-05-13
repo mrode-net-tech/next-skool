@@ -28,7 +28,7 @@ Use this file to track which days you have completed.
 - [x] Day 15 — Folder structure + Supertest
 
 ### Week 4 — Prisma + tests
-- [ ] Day 16 — Postgres via Docker
+- [x] Day 16 — Postgres via Docker
 - [ ] Day 17 — Install Prisma
 - [ ] Day 18 — First model + migration
 - [ ] Day 19 — CRUD with Prisma
