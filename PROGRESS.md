@@ -21,7 +21,7 @@ Use this file to track which days you have completed.
 - [x] Day 10 — Recap exercise
 
 ### Week 3 — Express + tests
-- [ ] Day 11 — Install Express
+- [x] Day 11 — Install Express
 - [ ] Day 12 — HTTP client + JSON
 - [ ] Day 13 — POST + req.body
 - [ ] Day 14 — Zod validation

@@ -74,6 +74,6 @@ Add a `GET /health` route returning `{ status: 'ok', uptime: process.uptime() }`
 - [Express — Routing](https://expressjs.com/en/guide/routing.html)
 
 ## Checklist
-- [ ] Server starts on port 3000
-- [ ] `GET /` returns JSON
-- [ ] `GET /health` works
+- [x] Server starts on port 3000
+- [x] `GET /` returns JSON
+- [x] `GET /health` works
