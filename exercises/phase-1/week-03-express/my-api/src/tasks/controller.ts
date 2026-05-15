@@ -47,7 +47,11 @@ export async function create(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const t = await taskService.create(req.body.title, req.body.priority);
+    const t = await taskService.create(
+      req.body.user_id,
+      req.body.title,
+      req.body.priority,
+    );
     res.status(StatusCodes.CREATED).json(t);
   } catch (err) {
     next(err);

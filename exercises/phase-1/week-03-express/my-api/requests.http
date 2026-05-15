@@ -10,11 +10,21 @@ Accept: application/json
 GET http://localhost:3000/tasks/cmp497mqm0001ybnxbhhdcs7g
 Accept: application/json
 
-### create
+### create user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Marek",
+  "email": "marek@test.com"
+}
+
+### create task
 POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
+  "user_id": "8f1802e5-f2d4-432d-bf35-097401079534",
   "title": "Some task",
   "priority": 3
 }

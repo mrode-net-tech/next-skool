@@ -16,4 +16,5 @@ beforeAll(() => {
 beforeEach(async () => {
   const { prisma } = await import('../db/prisma.js');
   await prisma.task.deleteMany();
+  await prisma.user.deleteMany();
 });

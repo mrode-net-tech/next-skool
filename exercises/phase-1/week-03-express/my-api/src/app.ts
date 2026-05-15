@@ -1,3 +1,4 @@
+import { usersRouter } from '@users/routes';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 
@@ -12,6 +13,7 @@ export function createApp() {
     res.status(StatusCodes.OK).json({ status: 'ok' }),
   );
   app.use('/tasks', tasksRouter);
+  app.use('/users', usersRouter);
 
   app.use(errorHandler);
 

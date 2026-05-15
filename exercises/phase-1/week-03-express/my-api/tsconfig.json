@@ -15,7 +15,9 @@
     "paths": {
       "@app": ["./src/app"],
       "@middleware/*": ["./src/middleware/*"],
-      "@tasks/*": ["./src/tasks/*"]
+      "@tasks/*": ["./src/tasks/*"],
+      "@users/*": ["./src/users/*"],
+      "@test/*": ["./src/test/*"]
     }
   },
   "include": ["src/**/*"]

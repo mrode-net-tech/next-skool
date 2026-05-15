@@ -7,6 +7,7 @@ import type { Priority, Task, TaskRepository } from './repository';
 function toDomainTask(row: PrismaTask): Task {
   return {
     id: row.id,
+    userId: row.user_id,
     title: row.title,
     done: row.done,
     priority: row.priority as Priority,
@@ -18,10 +19,14 @@ export class PrismaTaskRepository implements TaskRepository {
     await prisma.task.deleteMany();
   }
 
-  async list(filter?: { done?: boolean }): Promise<Task[]> {
+  async list(filter?: { done?: boolean; userId?: string }): Promise<Task[]> {
     const rows = await prisma.task.findMany({
+      include: { user: true },
       orderBy: { created_at: 'desc' },
-      where: filter?.done === undefined ? undefined : { done: filter.done },
+      where: {
+        done: filter?.done,
+        user_id: filter?.userId,
+      },
     });
     return rows.map(toDomainTask);
   }
@@ -31,9 +36,13 @@ export class PrismaTaskRepository implements TaskRepository {
     return row ? toDomainTask(row) : null;
   }
 
-  async add(title: string, priority: Priority): Promise<Task> {
+  async add(userId: string, title: string, priority: Priority): Promise<Task> {
     const row = await prisma.task.create({
-      data: { title, priority },
+      data: {
+        title: title,
+        priority: priority,
+        user_id: userId,
+      },
     });
     return toDomainTask(row);
   }
@@ -46,7 +55,11 @@ export class PrismaTaskRepository implements TaskRepository {
   ): Promise<Task> {
     const row = await prisma.task.update({
       where: { id },
-      data: { title, priority, done },
+      data: {
+        title: title,
+        priority: priority,
+        done: done,
+      },
     });
     return toDomainTask(row);
   }

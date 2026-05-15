@@ -119,7 +119,7 @@ Add `GET /users/:id/tasks` returning that user's tasks. Test it.
 - [Prisma — include vs select](https://www.prisma.io/docs/orm/prisma-client/queries/select-fields)
 
 ## Checklist
-- [ ] `User` and relation migration applied
-- [ ] POST /tasks requires `userId`
-- [ ] All Supertest tests green
-- [ ] `GET /users/:id/tasks` works
+- [x] `User` and relation migration applied
+- [x] POST /tasks requires `userId`
+- [x] All Supertest tests green
+- [x] `GET /users/:id/tasks` works

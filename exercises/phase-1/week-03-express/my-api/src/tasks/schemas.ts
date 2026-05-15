@@ -5,6 +5,7 @@ import { type Priority } from './repository';
 const PRIORITIES = [1, 2, 3] as const satisfies Priority[];
 
 export const createTaskSchema = z.object({
+  user_id: z.string().min(1),
   title: z.string().min(1).max(200),
   priority: z.union([
     z.literal(PRIORITIES[0]),
