@@ -104,18 +104,54 @@ infrastructure/
 
 Use cases are `@injectable()` classes, ports are wired through `tsyringe` with string tokens in `src/shared/tokens.ts`. See Day 28 for the canonical example.
 
-## Capstone TODO
+## Capstone change — AI Portfolio (`ai-folio`)
 
-`capstone-project/` is 80% there. Remaining:
+**The capstone project has changed from Habit Tracker to an AI-powered portfolio site.**
+Project name: `ai-folio`. Phases 5–6 now build this instead.
 
-- `database-schema.md` — add Auth.js tables (`Session`, `Account`, `VerificationToken`).
-- `api-spec.md` — add Zod schemas + standardized error response shape.
-- `domain-model.md` — add explicit business rules (e.g. "completing today's habit twice is a no-op") and domain events.
-- `ui-wireframes.md` — add ASCII wireframes for: dashboard, habit detail, settings.
-- `deployment.md` — add pre-deploy checklist + disaster recovery section.
-- New file `ARCHITECTURE.md` — diagrams + folder layout overview.
-- New file `TESTING-STRATEGY.md` — what is unit/integration/e2e per area.
-- `README.md` — expand prerequisites + quick start.
+### What `ai-folio` is
+
+A portfolio website + AI chat system where:
+- Visitors ask questions about the portfolio owner via a chat widget
+- Claude answers using RAG (CV + project descriptions indexed in pgvector)
+- Responses stream in real-time via Vercel AI SDK
+- Each conversation is analyzed: intent classified (job offer / collab / question / spam), lead-scored 1-5
+- New conversations auto-create Kanban cards in an internal admin dashboard
+- Owner gets email notifications (Resend) for high-scoring leads
+- Admin can view all conversations, see AI summaries, draft replies
+
+### Tech additions vs Habit Tracker
+
+- `@anthropic-ai/sdk` — Claude API calls
+- `ai` (Vercel AI SDK) — `streamText`, `useChat`, `generateObject`
+- `pgvector` (Postgres extension) — RAG embedding store
+- Resend — transactional email
+- SSE (server-sent events) — real-time admin notifications
+- Optional: Pusher/Ably for WebSocket if SSE is insufficient
+
+### Phase 5 revised day titles (Days 81–100)
+
+Week 17: 81 create-next-app (ai-folio), 82 App Router + portfolio layout, 83 Portfolio sections (about/projects/skills), 84 Loading+error UI, 85 Metadata + SEO.
+Week 18: 86 Server Components vs Client, 87 Claude API intro + streamText, 88 Chat widget (useChat + streaming), 89 RAG setup (pgvector + embeddings), 90 Chat answers from CV context.
+Week 19: 91 Server Actions (contact form), 92 Auth.js setup (admin login), 93 Admin dashboard layout, 94 Kanban board (conversations as cards), 95 Lead scoring with generateObject.
+Week 20: 96 Email notifications (Resend), 97 GitHub API integration (auto-pull projects), 98 Analytics tab, 99 AI draft-reply feature, 100 MVP polish + production deploy.
+
+### Phase 6 revised day titles (Days 101–120)
+
+Week 21: 101 Dockerfile (Next.js), 102 docker-compose with Postgres+pgvector, 103 Multi-stage builds, 104 Image size optimization, 105 Local full stack with Docker.
+Week 22: 106 GH Actions hello, 107 Lint+typecheck job, 108 Test job, 109 Build+deploy job, 110 Caching+secrets.
+Week 23: 111 BullMQ basics, 112 Redis setup, 113 Background embedding job (new project → index), 114 Scheduled digest email (weekly lead summary), 115 Worker deployment.
+Week 24: 116 Sentry integration, 117 Production env setup, 118 Production deploy (Fly.io or Railway), 119 Post-deploy monitoring, 120 Final retrospective.
+
+### Capstone TODO (was habit-tracker, now ai-folio)
+
+- Rewrite `capstone-project/README.md` for `ai-folio`
+- Rewrite `capstone-project/domain-model.md` — entities: Conversation, Message, Lead, KanbanCard
+- Rewrite `capstone-project/database-schema.md` — add Auth.js tables + `conversations`, `messages`, `leads`, pgvector `embeddings`
+- Rewrite `capstone-project/api-spec.md` — chat endpoint (streaming), admin CRUD, lead scoring
+- Rewrite `capstone-project/ui-wireframes.md` — portfolio page, chat widget, admin dashboard, Kanban
+- New file `capstone-project/ARCHITECTURE.md` — RAG pipeline diagram, streaming flow
+- New file `capstone-project/TESTING-STRATEGY.md`
 
 ## Per-phase day titles
 
@@ -133,17 +169,17 @@ Week 14: 66 packages/types, 67 Shared Zod schemas, 68 Type-safe API client (fetc
 Week 15: 71 Login flow end-to-end, 72 Token storage (httpOnly cookie or localStorage tradeoffs), 73 Protected routes (web), 74 401 handling+refresh, 75 Logout.
 Week 16: 76 Playwright setup, 77 First e2e test, 78 Deploy api (Railway/Fly), 79 Deploy web (Vercel), 80 CI runs e2e.
 
-### Phase 5 — Next.js (Days 81–100)
-Week 17: 81 create-next-app, 82 App Router basics, 83 Layouts+templates, 84 Loading+error UI, 85 Metadata.
-Week 18: 86 Server Components vs Client, 87 Data fetching in RSC, 88 Streaming+Suspense, 89 Habit Tracker MVP setup, 90 Habits list page.
-Week 19: 91 Server Actions, 92 Auth.js setup, 93 Credentials provider, 94 Protected pages, 95 Forms with Server Actions.
-Week 20: 96 Habits CRUD complete, 97 Calendar/heatmap view, 98 Statistics, 99 Settings page, 100 MVP polish.
+### Phase 5 — Next.js / ai-folio (Days 81–100)
+Week 17: 81 create-next-app (ai-folio), 82 App Router + portfolio layout, 83 Portfolio sections, 84 Loading+error UI, 85 Metadata+SEO.
+Week 18: 86 Server Components vs Client, 87 Claude API intro + streamText, 88 Chat widget (useChat+streaming), 89 RAG setup (pgvector+embeddings), 90 Chat answers from CV context.
+Week 19: 91 Server Actions (contact form), 92 Auth.js setup (admin), 93 Admin dashboard layout, 94 Kanban board (conversations as cards), 95 Lead scoring with generateObject.
+Week 20: 96 Email notifications (Resend), 97 GitHub API integration, 98 Analytics tab, 99 AI draft-reply feature, 100 MVP polish.
 
-### Phase 6 — Job-ready (Days 101–120)
-Week 21: 101 Dockerfile (Next.js), 102 docker-compose with Postgres, 103 Multi-stage builds, 104 Image size optimization, 105 Local stack with Docker.
-Week 22: 106 GH Actions hello, 107 Lint+typecheck job, 108 Test job, 109 Build job, 110 Caching+matrix.
-Week 23: 111 BullMQ basics, 112 Redis setup, 113 Habit reminder job, 114 Repeatable jobs (cron), 115 Worker deployment.
-Week 24: 116 Sentry integration, 117 Production env setup, 118 Production deploy, 119 Post-deploy monitoring, 120 Final retrospective.
+### Phase 6 — Job-ready / ai-folio (Days 101–120)
+Week 21: 101 Dockerfile (Next.js), 102 docker-compose with Postgres+pgvector, 103 Multi-stage builds, 104 Image size optimization, 105 Local full stack with Docker.
+Week 22: 106 GH Actions hello, 107 Lint+typecheck job, 108 Test job, 109 Build+deploy job, 110 Caching+secrets.
+Week 23: 111 BullMQ basics, 112 Redis setup, 113 Background embedding job, 114 Scheduled digest email, 115 Worker deployment.
+Week 24: 116 Sentry integration, 117 Production env setup, 118 Production deploy (Fly.io/Railway), 119 Post-deploy monitoring, 120 Final retrospective.
 
 ## Workflow tips
 
