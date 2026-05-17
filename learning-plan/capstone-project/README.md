@@ -1,4 +1,26 @@
-# Capstone project — Habit Tracker SaaS
+# Capstone projects
+
+Two capstone projects are documented here. Build them in order — Habit Tracker first (simpler), ai-folio second (advanced).
+
+---
+
+## Project 1 — Habit Tracker SaaS
+
+**Simpler. Build this first to solidify Next.js + Auth.js + Prisma + background jobs.**
+
+→ All docs in this folder (`README.md`, `domain-model.md`, etc.) describe this project.
+
+---
+
+## Project 2 — ai-folio (AI-powered portfolio)
+
+**Advanced. Build after Habit Tracker. Adds Claude API, pgvector RAG, lead scoring, admin Kanban.**
+
+→ All docs in [`ai-folio/`](./ai-folio/)
+
+---
+
+## Original Habit Tracker SaaS
 
 ## What you will build
 

@@ -5,11 +5,11 @@ metadata:
   type: project
 ---
 
-Capstone project is now `ai-folio` — an AI-powered portfolio page (not Habit Tracker).
+Two capstone projects exist. Habit Tracker is project 1 (simpler, builds Next.js fundamentals). ai-folio is project 2 (advanced, adds AI features).
 
-**Why:** User wants to showcase AI skills in their portfolio. More impressive for job hunting.
+**Why:** User wants to keep Habit Tracker as a simpler intro project, then build ai-folio as the main portfolio showcasing AI skills.
 
-**How to apply:** Phases 5–6 build `ai-folio`. Any reference to "Habit Tracker" in future lessons should be replaced with `ai-folio` features.
+**How to apply:** Phases 5–6 days build `ai-folio`. The Habit Tracker docs in `capstone-project/` (root level) remain valid. ai-folio docs live in `capstone-project/ai-folio/`. Do NOT remove or overwrite the Habit Tracker docs.
 
 ## Core features
 - Portfolio page (About, Projects, Skills, Contact)
