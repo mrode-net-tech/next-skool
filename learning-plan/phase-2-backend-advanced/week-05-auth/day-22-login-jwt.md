@@ -172,7 +172,7 @@ Decode the returned token (without verifying) using `Buffer.from(token.split('.'
 - [JWT.io](https://jwt.io/)
 
 ## Checklist
-- [ ] `POST /auth/login` returns `{ token }` for valid credentials
-- [ ] Wrong password / unknown email both return 401
-- [ ] Token is a valid 3-part JWT string
-- [ ] `JWT_SECRET` comes from environment variable
+- [x] `POST /auth/login` returns `{ token }` for valid credentials
+- [x] Wrong password / unknown email both return 401
+- [x] Token is a valid 3-part JWT string
+- [x] `JWT_SECRET` comes from environment variable

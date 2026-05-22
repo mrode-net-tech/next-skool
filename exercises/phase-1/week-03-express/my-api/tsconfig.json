@@ -15,6 +15,7 @@
     "paths": {
       "@app": ["./src/app"],
       "@middleware/*": ["./src/middleware/*"],
+      "@auth/*": ["./src/auth/*"],
       "@tasks/*": ["./src/tasks/*"],
       "@users/*": ["./src/users/*"],
       "@test/*": ["./src/test/*"]

@@ -1,3 +1,4 @@
+import { authRouter } from '@auth/routes';
 import { usersRouter } from '@users/routes';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -12,6 +13,7 @@ export function createApp() {
   app.get('/health', (_req, res) =>
     res.status(StatusCodes.OK).json({ status: 'ok' }),
   );
+  app.use('/auth', authRouter);
   app.use('/tasks', tasksRouter);
   app.use('/users', usersRouter);
 
