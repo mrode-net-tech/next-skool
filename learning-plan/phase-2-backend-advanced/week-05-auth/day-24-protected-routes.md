@@ -177,7 +177,7 @@ Verify that `DELETE /tasks/:id` returns 404 when the authenticated user tries to
 - [OWASP — IDOR](https://owasp.org/www-community/attacks/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet)
 
 ## Checklist
-- [ ] `GET|POST|PATCH|DELETE /tasks` all return 401 without a token
-- [ ] Tasks are filtered by the authenticated user's ID
-- [ ] `userId` is no longer accepted in the request body
-- [ ] Cross-user isolation test passes
+- [x] `GET|POST|PATCH|DELETE /tasks` all return 401 without a token
+- [x] Tasks are filtered by the authenticated user's ID
+- [x] `userId` is no longer accepted in the request body
+- [x] Cross-user isolation test passes

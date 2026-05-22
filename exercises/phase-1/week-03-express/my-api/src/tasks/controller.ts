@@ -15,9 +15,12 @@ export async function list(
   next: NextFunction,
 ): Promise<void> {
   try {
-    let filter: { done: boolean } | undefined;
-    if (req.query.done === 'true') filter = { done: true };
-    else if (req.query.done === 'false') filter = { done: false };
+    const filter: { userId: string; done: boolean | undefined } = {
+      userId: req.user!.sub,
+      done: undefined,
+    };
+    if (req.query.done === 'true') filter.done = true;
+    else if (req.query.done === 'false') filter.done = false;
     res.status(StatusCodes.OK).json(await taskService.list(filter));
   } catch (err) {
     next(err);
@@ -30,12 +33,7 @@ export async function show(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const t = await taskService.find(req.params.id);
-    if (!t) {
-      res.status(StatusCodes.NOT_FOUND).json({ error: 'not found' });
-      return;
-    }
-    res.json(t);
+    res.json(req.task!);
   } catch (err) {
     next(err);
   }
@@ -48,7 +46,7 @@ export async function create(
 ): Promise<void> {
   try {
     const t = await taskService.create(
-      req.body.user_id,
+      req.user!.sub,
       req.body.title,
       req.body.priority,
     );
@@ -66,6 +64,7 @@ export async function update(
   try {
     const t = await taskService.update(
       req.params.id,
+      req.user!.sub,
       req.body.title,
       req.body.priority,
       req.body.done,
@@ -82,12 +81,7 @@ export async function remove(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const removed = await taskService.remove(req.params.id);
-    if (!removed) {
-      res.status(StatusCodes.NOT_FOUND).json({ error: 'not found' });
-      return;
-    }
-
+    await taskService.remove(req.params.id);
     res.status(StatusCodes.NO_CONTENT).send();
   } catch (err) {
     next(err);

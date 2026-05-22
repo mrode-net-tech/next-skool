@@ -10,10 +10,9 @@ export interface Task {
 
 export interface TaskRepository {
   reset(): Promise<void>;
-  list(filter?: { done?: boolean; userId?: string }): Promise<Task[]>;
+  list(filter: { userId: string; done?: boolean | undefined }): Promise<Task[]>;
   find(id: string): Promise<Task | null>;
-  add(userId: string, title: string, priority: Priority): Promise<Task>;
-  update(id: string, title: string, priority: Priority, done: boolean): Promise<Task>;
+  save(task: Task): Promise<Task>;
   remove(id: string): Promise<boolean>;
   markDone(id: string): Promise<Task>;
 }

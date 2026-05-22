@@ -50,10 +50,17 @@ describe('taskService', () => {
     const user = await createUser();
     const created = await createTask(user.id);
 
-    const updated = await taskService.update(created.id, 'Changed', 3, true);
+    const updated = await taskService.update(
+      created.id,
+      user.id,
+      'Changed',
+      3,
+      true,
+    );
 
     expect(updated).toMatchObject({
       id: created.id,
+      userId: user.id,
       title: 'Changed',
       done: true,
       priority: 3,

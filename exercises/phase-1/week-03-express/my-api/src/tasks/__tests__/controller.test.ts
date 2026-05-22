@@ -9,13 +9,16 @@ import { createApp } from '@app';
 const app = createApp();
 
 describe('tasks API', () => {
-  let userId: string;
   let userToken: string;
 
   beforeEach(async () => {
     const user = await createUser();
-    userId = user.id;
     userToken = signAccess({ sub: user.id, email: user.email });
+  });
+
+  it('returns 401 without token', async () => {
+    const res = await request(app).get('/tasks');
+    expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
   });
 
   it('lists empty initially', async () => {
@@ -30,7 +33,7 @@ describe('tasks API', () => {
     const created = await request(app)
       .post('/tasks')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({ user_id: userId, title: 'Buy milk', priority: 1 });
+      .send({ title: 'Buy milk', priority: 1 });
     expect(created.status).toBe(StatusCodes.CREATED);
     expect(created.body.title).toBe('Buy milk');
 
@@ -44,7 +47,7 @@ describe('tasks API', () => {
     const created = await request(app)
       .post('/tasks')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({ user_id: userId, title: 'Buy milk', priority: 1 });
+      .send({ title: 'Buy milk', priority: 1 });
 
     const marked = await request(app)
       .patch(`/tasks/${created.body.id}/done`)
@@ -52,11 +55,11 @@ describe('tasks API', () => {
     expect(marked.status).toBe(StatusCodes.NO_CONTENT);
   });
 
-  it('creates and updates and marks as done', async () => {
+  it('creates and updates', async () => {
     const created = await request(app)
       .post('/tasks')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({ user_id: userId, title: 'Buy milk', priority: 1 });
+      .send({ title: 'Buy milk', priority: 1 });
 
     const updated = await request(app)
       .put(`/tasks/${created.body.id}`)
@@ -80,10 +83,72 @@ describe('tasks API', () => {
     const c = await request(app)
       .post('/tasks')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({ user_id: userId, title: 'temp', priority: 2 });
+      .send({ title: 'temp', priority: 2 });
     const d = await request(app)
       .delete(`/tasks/${c.body.id}`)
       .set('Authorization', `Bearer ${userToken}`);
     expect(d.status).toBe(StatusCodes.NO_CONTENT);
+  });
+
+  describe('cross-user isolation', () => {
+    let otherToken: string;
+
+    beforeEach(async () => {
+      const other = await createUser();
+      otherToken = signAccess({ sub: other.id, email: other.email });
+    });
+
+    it('GET /:id returns 403 for another user task', async () => {
+      const created = await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ title: 'Private task', priority: 1 });
+
+      const res = await request(app)
+        .get(`/tasks/${created.body.id}`)
+        .set('Authorization', `Bearer ${otherToken}`);
+      expect(res.status).toBe(StatusCodes.FORBIDDEN);
+    });
+
+    it('DELETE /:id returns 403 for another user task', async () => {
+      const created = await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ title: 'Private task', priority: 1 });
+
+      const res = await request(app)
+        .delete(`/tasks/${created.body.id}`)
+        .set('Authorization', `Bearer ${otherToken}`);
+      expect(res.status).toBe(StatusCodes.FORBIDDEN);
+    });
+
+    it('PATCH /:id/done returns 403 for another user task', async () => {
+      const created = await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ title: 'Private task', priority: 1 });
+
+      const res = await request(app)
+        .patch(`/tasks/${created.body.id}/done`)
+        .set('Authorization', `Bearer ${otherToken}`);
+      expect(res.status).toBe(StatusCodes.FORBIDDEN);
+    });
+
+    it('user sees only their own tasks', async () => {
+      await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ title: 'My task', priority: 1 });
+      await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${otherToken}`)
+        .send({ title: 'Their task', priority: 1 });
+
+      const res = await request(app)
+        .get('/tasks')
+        .set('Authorization', `Bearer ${userToken}`);
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].title).toBe('My task');
+    });
   });
 });

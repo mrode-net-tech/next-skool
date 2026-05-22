@@ -40,7 +40,7 @@ Use this file to track which days you have completed.
 - [x] Day 21 — bcrypt + register
 - [x] Day 22 — Login + JWT
 - [x] Day 23 — Auth middleware
-- [ ] Day 24 — Protected routes
+- [x] Day 24 — Protected routes
 - [ ] Day 25 — Refresh tokens + tests
 
 ### Week 6 — DDD structure

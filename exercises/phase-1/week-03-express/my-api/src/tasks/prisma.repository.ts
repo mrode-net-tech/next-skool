@@ -19,13 +19,16 @@ export class PrismaTaskRepository implements TaskRepository {
     await prisma.task.deleteMany();
   }
 
-  async list(filter?: { done?: boolean; userId?: string }): Promise<Task[]> {
+  async list(filter: {
+    userId: string;
+    done?: boolean | undefined;
+  }): Promise<Task[]> {
     const rows = await prisma.task.findMany({
       include: { user: true },
       orderBy: { created_at: 'desc' },
       where: {
-        done: filter?.done,
-        user_id: filter?.userId,
+        done: filter.done,
+        user_id: filter.userId,
       },
     });
     return rows.map(toDomainTask);
@@ -60,6 +63,21 @@ export class PrismaTaskRepository implements TaskRepository {
         priority: priority,
         done: done,
       },
+    });
+    return toDomainTask(row);
+  }
+
+  async save(task: Task): Promise<Task> {
+    const data = {
+      title: task.title,
+      priority: task.priority,
+      user_id: task.userId,
+      done: task.done,
+    };
+    const row = await prisma.task.upsert({
+      where: { id: task.id },
+      create: { id: task.id, ...data },
+      update: data,
     });
     return toDomainTask(row);
   }

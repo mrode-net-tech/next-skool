@@ -3,7 +3,6 @@ import { usersRouter } from '@users/routes';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { requireAuth } from '@middleware/auth';
 import { errorHandler } from '@middleware/error-handler';
 import { tasksRouter } from '@tasks/routes';
 
@@ -17,9 +16,6 @@ export function createApp() {
   );
   app.use('/auth', authRouter);
   app.use('/users', usersRouter);
-
-  // Protected area — all routes below this line require a valid JWT
-  app.use(requireAuth);
   app.use('/tasks', tasksRouter);
 
   return app;

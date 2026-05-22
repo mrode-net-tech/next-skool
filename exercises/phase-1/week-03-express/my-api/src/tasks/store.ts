@@ -1,6 +1,4 @@
-import { randomUUID } from 'node:crypto';
-
-import { Priority, Task, TaskRepository } from '@tasks/repository';
+import { Task, TaskRepository } from '@tasks/repository';
 
 export class TaskStore implements TaskRepository {
   private tasks: Map<string, Task> = new Map<string, Task>();
@@ -33,35 +31,9 @@ export class TaskStore implements TaskRepository {
     return Promise.resolve(task);
   }
 
-  add(userId: string, title: string, priority: Priority): Promise<Task> {
-    const task: Task = {
-      id: randomUUID(),
-      userId: userId,
-      title: title,
-      done: false,
-      priority: priority,
-    };
-
+  save(task: Task): Promise<Task> {
     this.tasks.set(task.id, task);
-
     return Promise.resolve(task);
-  }
-
-  update(
-    id: string,
-    title: string,
-    priority: Priority,
-    done: boolean,
-  ): Promise<Task> {
-    const task = this.tasks.get(id);
-    if (!task) {
-      throw new Error(`Task with id ${id} not found`);
-    }
-
-    const updated: Task = { ...task, title, priority, done };
-    this.tasks.set(updated.id, updated);
-
-    return Promise.resolve(updated);
   }
 
   remove(id: string): Promise<boolean> {

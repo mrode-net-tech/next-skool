@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { createTask } from '@test/tasks.factory';
 import { createUser } from '@test/users.factory';
 import { describe, expect, it } from 'vitest';
@@ -11,7 +13,13 @@ describe('PrismaTaskRepository', () => {
   it('adds a task', async () => {
     const user = await createUser();
 
-    const task = await repository.add(user.id, 'Buy milk', 1);
+    const task = await repository.save({
+      id: randomUUID(),
+      userId: user.id,
+      title: 'Buy milk',
+      done: false,
+      priority: 1,
+    });
 
     expect(task).toMatchObject({
       id: expect.any(String),
@@ -67,7 +75,13 @@ describe('PrismaTaskRepository', () => {
     const user = await createUser();
     const created = await createTask(user.id);
 
-    const updated = await repository.update(created.id, 'Changed', 3, true);
+    const updated = await repository.save({
+      id: created.id,
+      userId: user.id,
+      title: 'Changed',
+      done: true,
+      priority: 3,
+    });
 
     expect(updated).toMatchObject({
       id: created.id,
