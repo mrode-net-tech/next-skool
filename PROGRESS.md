@@ -41,10 +41,10 @@ Use this file to track which days you have completed.
 - [x] Day 22 — Login + JWT
 - [x] Day 23 — Auth middleware
 - [x] Day 24 — Protected routes
-- [ ] Day 25 — Refresh tokens + tests
+- [x] Day 25 — Refresh tokens + tests
 
 ### Week 6 — DDD structure
-- [ ] Day 26 — Layers explained
+- [x] Day 26 — Layers explained
 - [ ] Day 27 — Refactor users into module
 - [ ] Day 28 — Use cases
 - [ ] Day 29 — Dependency injection

@@ -209,8 +209,8 @@ Add a manual expiry test: insert a `RefreshToken` row directly via Prisma with `
 - [Auth0 — Refresh Tokens](https://auth0.com/docs/secure/tokens/refresh-tokens)
 
 ## Checklist
-- [ ] `RefreshToken` table created via migration
-- [ ] `/auth/login` returns `{ accessToken, refreshToken }`
-- [ ] `/auth/refresh` issues a new access token
-- [ ] `/auth/logout` revokes the refresh token (subsequent refresh returns 401)
-- [ ] All four refresh-flow tests pass
+- [x] `RefreshToken` table created via migration
+- [x] `/auth/login` returns `{ accessToken, refreshToken }`
+- [x] `/auth/refresh` issues a new access token
+- [x] `/auth/logout` revokes the refresh token (subsequent refresh returns 401)
+- [x] All four refresh-flow tests pass

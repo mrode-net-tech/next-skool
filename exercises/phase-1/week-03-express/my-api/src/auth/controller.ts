@@ -1,5 +1,14 @@
 import { signAccess } from '@auth/jwt';
-import { LoginUserBody, RegisterUserBody } from '@auth/schemas';
+import {
+  consumeRefreshToken,
+  issueRefreshToken,
+  revokeRefreshToken,
+} from '@auth/refresh';
+import {
+  LoginUserBody,
+  RefreshTokenBody,
+  RegisterUserBody,
+} from '@auth/schemas';
 import { User } from '@users/repository';
 import { userService } from '@users/service';
 import bcrypt from 'bcryptjs';
@@ -50,8 +59,32 @@ export async function login(
     return;
   }
 
-  const token = signAccess({ sub: user.id, email: user.email });
-  res.json({ token });
+  const accessToken = signAccess({ sub: user.id, email: user.email });
+  const refreshToken = await issueRefreshToken(user.id);
+  res.json({ accessToken, refreshToken });
+}
+
+export async function logout(
+  req: Request<ParamsDictionary, unknown, RefreshTokenBody>,
+  res: Response,
+): Promise<void> {
+  await revokeRefreshToken(req.body.refresh_token);
+  res.status(StatusCodes.NO_CONTENT).send();
+}
+
+export async function refresh(
+  req: Request<ParamsDictionary, unknown, RefreshTokenBody>,
+  res: Response,
+): Promise<void> {
+  const row = await consumeRefreshToken(req.body.refresh_token);
+  if (!row) {
+    res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ error: 'invalid_refresh_token' });
+  } else {
+    const accessToken = signAccess({ sub: row.user.id, email: row.user.email });
+    res.json({ accessToken });
+  }
 }
 
 export async function me(req: Request, res: Response): Promise<void> {

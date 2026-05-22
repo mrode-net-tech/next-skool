@@ -4,7 +4,11 @@ import { requireAuth } from '@middleware/auth';
 import { validateBody } from '@middleware/validate';
 
 import * as controller from './controller';
-import { loginUserSchema, registerUserSchema } from './schemas';
+import {
+  loginUserSchema,
+  refreshTokenSchema,
+  registerUserSchema,
+} from './schemas';
 
 export const authRouter = Router();
 
@@ -15,6 +19,12 @@ authRouter.post(
 );
 
 authRouter.post('/login', validateBody(loginUserSchema), controller.login);
+authRouter.post('/logout', validateBody(refreshTokenSchema), controller.logout);
+authRouter.post(
+  '/refresh',
+  validateBody(refreshTokenSchema),
+  controller.refresh,
+);
 
 authRouter.use(requireAuth);
 authRouter.get('/me', controller.me);
