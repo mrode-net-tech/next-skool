@@ -39,7 +39,7 @@ describe('auth API', () => {
     expect(res.status).toBe(StatusCodes.BAD_REQUEST);
   });
 
-  it('returns a token on valid credentials', async () => {
+  it('returns a token on valid credentials and user details', async () => {
     await createUser({ email: 'alice@example.com' });
     const res = await request(app).post('/auth/login').send({
       email: 'alice@example.com',
@@ -48,6 +48,15 @@ describe('auth API', () => {
     expect(res.status).toBe(StatusCodes.OK);
     expect(typeof res.body.token).toBe('string');
     expect(res.body.token.split('.').length).toBe(3); // JWT shape
+
+    const token = res.body.token;
+
+    const me = await request(app)
+      .get('/auth/me')
+      .set({ Authorization: `Bearer ${token}` });
+    expect(me.status).toBe(StatusCodes.OK);
+    expect(me.body.email).toBe('alice@example.com');
+    expect(me.body.password).toBeUndefined();
   });
 
   it('returns 401 on wrong password', async () => {

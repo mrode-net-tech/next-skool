@@ -13,7 +13,7 @@ describe('users API', () => {
     const user = await createUser();
     const task = await createTask(user.id);
 
-    const list = await request(app).get('/tasks');
+    const list = await request(app).get(`/users/${user.id}/tasks`);
 
     expect(list.status).toBe(StatusCodes.OK);
     expect(list.body).toHaveLength(1);

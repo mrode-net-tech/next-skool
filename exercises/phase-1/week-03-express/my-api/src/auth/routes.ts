@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { requireAuth } from '@middleware/auth';
 import { validateBody } from '@middleware/validate';
 
 import * as controller from './controller';
@@ -14,3 +15,6 @@ authRouter.post(
 );
 
 authRouter.post('/login', validateBody(loginUserSchema), controller.login);
+
+authRouter.use(requireAuth);
+authRouter.get('/me', controller.me);

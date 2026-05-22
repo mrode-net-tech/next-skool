@@ -4,6 +4,10 @@ import bcrypt from 'bcryptjs';
 import { User } from './repository';
 
 export const userService = {
+  async findById(id: string): Promise<User> {
+    return userStore.findById(id);
+  },
+
   async findByEmail(email: string): Promise<User | null> {
     return userStore.findByEmail(email);
   },

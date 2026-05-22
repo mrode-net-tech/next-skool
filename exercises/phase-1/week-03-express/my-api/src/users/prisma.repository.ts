@@ -20,6 +20,12 @@ export class PrismaUserRepository implements UserRepository {
     await prisma.user.deleteMany();
   }
 
+  async findById(id: string): Promise<User> {
+    const row = await prisma.user.findUniqueOrThrow({ where: { id } });
+
+    return toDomainUser(row);
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const row = await prisma.user.findUnique({ where: { email } });
 

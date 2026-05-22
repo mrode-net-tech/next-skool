@@ -142,8 +142,8 @@ Add an `GET /auth/me` route (also behind `requireAuth`) that returns `req.user`.
 - [TypeScript — Declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html)
 
 ## Checklist
-- [ ] `requireAuth` middleware exists in `src/middleware/auth.ts`
-- [ ] Missing token → 401 `missing_token`
-- [ ] Invalid/expired token → 401 `invalid_token`
-- [ ] Valid token → request continues to route handler
-- [ ] `req.user` is typed as `JwtPayload`
+- [x] `requireAuth` middleware exists in `src/middleware/auth.ts`
+- [x] Missing token → 401 `missing_token`
+- [x] Invalid/expired token → 401 `invalid_token`
+- [x] Valid token → request continues to route handler
+- [x] `req.user` is typed as `JwtPayload`

@@ -3,21 +3,24 @@ import { usersRouter } from '@users/routes';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { requireAuth } from '@middleware/auth';
 import { errorHandler } from '@middleware/error-handler';
 import { tasksRouter } from '@tasks/routes';
 
 export function createApp() {
   const app = express();
   app.use(express.json());
+  app.use(errorHandler);
 
   app.get('/health', (_req, res) =>
     res.status(StatusCodes.OK).json({ status: 'ok' }),
   );
   app.use('/auth', authRouter);
-  app.use('/tasks', tasksRouter);
   app.use('/users', usersRouter);
 
-  app.use(errorHandler);
+  // Protected area — all routes below this line require a valid JWT
+  app.use(requireAuth);
+  app.use('/tasks', tasksRouter);
 
   return app;
 }

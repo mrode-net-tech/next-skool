@@ -1,3 +1,4 @@
+import { signAccess } from '@auth/jwt';
 import { LoginUserBody, RegisterUserBody } from '@auth/schemas';
 import { User } from '@users/repository';
 import { userService } from '@users/service';
@@ -5,8 +6,6 @@ import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { StatusCodes } from 'http-status-codes';
-
-import { signAccess } from '../jwt';
 
 function transformUser(user: User) {
   return {
@@ -53,4 +52,10 @@ export async function login(
 
   const token = signAccess({ sub: user.id, email: user.email });
   res.json({ token });
+}
+
+export async function me(req: Request, res: Response): Promise<void> {
+  const user = await userService.findById(req.user!.sub);
+
+  res.status(StatusCodes.OK).json(transformUser(user));
 }
