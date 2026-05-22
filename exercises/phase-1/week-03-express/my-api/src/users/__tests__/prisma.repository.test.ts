@@ -7,7 +7,7 @@ describe('PrismaUserRepository', () => {
   const repository = new PrismaUserRepository();
 
   it('adds a user', async () => {
-    const user = await repository.add('Marek', 'marek@test.com');
+    const user = await repository.add('Marek', 'marek@test.com', 'test');
 
     expect(user).toMatchObject({
       id: expect.any(String),
@@ -17,7 +17,7 @@ describe('PrismaUserRepository', () => {
   });
 
   it('resets users', async () => {
-    await repository.add('Marek', 'marek@test.com');
+    await repository.add('Marek', 'marek@test.com', 'test');
 
     await repository.reset();
 

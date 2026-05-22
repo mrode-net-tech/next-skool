@@ -11,12 +11,13 @@ GET http://localhost:3000/tasks/cmp497mqm0001ybnxbhhdcs7g
 Accept: application/json
 
 ### create user
-POST http://localhost:3000/users
+POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
   "name": "Marek",
-  "email": "marek@test.com"
+  "email": "marek@test.com",
+  "password": "testing12"
 }
 
 ### create task

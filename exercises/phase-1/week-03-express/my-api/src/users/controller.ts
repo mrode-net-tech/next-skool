@@ -1,22 +1,35 @@
+import { User } from '@users/repository';
+import { RegisterUserBody } from '@users/schemas';
 import { NextFunction, Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { StatusCodes } from 'http-status-codes';
 
 import { taskService } from '@tasks/service';
 
-import { type CreateUserBody } from './schemas';
 import { userService } from './service';
 
-export async function create(
-  req: Request<ParamsDictionary, unknown, CreateUserBody>,
+function transformUser(user: User) {
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  };
+}
+
+export async function register(
+  req: Request<ParamsDictionary, unknown, RegisterUserBody>,
   res: Response,
-  next: NextFunction,
 ): Promise<void> {
-  try {
-    const t = await userService.create(req.body.name, req.body.email);
-    res.status(StatusCodes.CREATED).json(t);
-  } catch (err) {
-    next(err);
+  const { email, password, name } = req.body;
+
+  const existing = await userService.findByEmail(email);
+
+  if (existing) {
+    res.status(StatusCodes.CONFLICT).json({ error: 'email_taken' });
+  } else {
+    const user = await userService.create(name, email, password);
+
+    res.status(StatusCodes.CREATED).json(transformUser(user));
   }
 }
 
@@ -26,7 +39,7 @@ export async function tasks(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const t = await taskService.list({userId: req.params.id});
+    const t = await taskService.list({ userId: req.params.id });
     if (!t) {
       res.status(StatusCodes.NOT_FOUND).json({ error: 'not found' });
       return;

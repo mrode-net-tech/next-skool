@@ -1,8 +1,9 @@
 import { z } from 'zod';
 
-export const createUserSchema = z.object({
-  name: z.string().min(1),
+export const registerUserSchema = z.object({
   email: z.string().email(),
+  password: z.string().min(8, 'password must be at least 8 characters'),
+  name: z.string().min(1),
 });
 
-export type CreateUserBody = z.infer<typeof createUserSchema>;
+export type RegisterUserBody = z.infer<typeof registerUserSchema>;

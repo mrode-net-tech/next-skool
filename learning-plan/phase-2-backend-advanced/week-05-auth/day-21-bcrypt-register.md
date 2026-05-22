@@ -160,7 +160,7 @@ Add a `POST /auth/register` test that verifies the stored hash is NOT the plain 
 - [Prisma — select fields](https://www.prisma.io/docs/orm/prisma-client/queries/select-fields)
 
 ## Checklist
-- [ ] `password` column added via migration
-- [ ] `POST /auth/register` returns 201 without exposing `password`
-- [ ] Duplicate email returns 409
-- [ ] Short password returns 400
+- [x] `password` column added via migration
+- [x] `POST /auth/register` returns 201 without exposing `password`
+- [x] Duplicate email returns 409
+- [x] Short password returns 400

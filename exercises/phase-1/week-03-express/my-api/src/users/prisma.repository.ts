@@ -11,6 +11,7 @@ function toDomainUser(row: PrismaUser): User {
     id: row.id,
     name: row.name,
     email: row.email,
+    password: row.password,
   };
 }
 
@@ -19,12 +20,23 @@ export class PrismaUserRepository implements UserRepository {
     await prisma.user.deleteMany();
   }
 
-  async add(name: string, email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User | null> {
+    const row = await prisma.user.findUnique({ where: { email } });
+
+    if (row) {
+      return toDomainUser(row);
+    }
+
+    return null;
+  }
+
+  async add(name: string, email: string, password: string): Promise<User> {
     const row = await prisma.user.create({
       data: {
         id: randomUUID(),
         name: name,
         email: email,
+        password: password,
       },
     });
     return toDomainUser(row);

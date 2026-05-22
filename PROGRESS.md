@@ -37,7 +37,7 @@ Use this file to track which days you have completed.
 ## Phase 2 — Backend Advanced
 
 ### Week 5 — Auth (JWT)
-- [ ] Day 21 — bcrypt + register
+- [x] Day 21 — bcrypt + register
 - [ ] Day 22 — Login + JWT
 - [ ] Day 23 — Auth middleware
 - [ ] Day 24 — Protected routes

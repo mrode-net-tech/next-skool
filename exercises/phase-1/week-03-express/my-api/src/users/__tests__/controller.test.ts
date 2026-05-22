@@ -9,17 +9,35 @@ import { createApp } from '@app';
 const app = createApp();
 
 describe('users API', () => {
-  it('creates user', async () => {
-    const payload = {
-      name: 'Marek',
-      email: 'test@test.com',
+  it('creates a user and returns 201 without password', async () => {
+    const res = await request(app).post('/users/register').send({
+      name: 'Alice',
+      email: 'alice@example.com',
+      password: 'secret123',
+    });
+    expect(res.status).toBe(StatusCodes.CREATED);
+    expect(res.body.email).toBe('alice@example.com');
+    expect(res.body.password).toBeUndefined();
+  });
+
+  it('returns 409 when email is already taken', async () => {
+    await createUser({ email: 'bob@example.com' });
+    const data = {
+      name: 'Bob',
+      email: 'bob@example.com',
+      password: 'secret123',
     };
+    const res = await request(app).post('/users/register').send(data);
+    expect(res.status).toBe(StatusCodes.CONFLICT);
+  });
 
-    const created = await request(app).post('/users').send(payload);
-
-    expect(created.status).toBe(StatusCodes.CREATED);
-    expect(created.body).toMatchObject(payload);
-    expect(created.body.id).toEqual(expect.any(String));
+  it('returns 400 for a short password', async () => {
+    const res = await request(app).post('/users/register').send({
+      name: 'Alice',
+      email: 'x@example.com',
+      password: '123',
+    });
+    expect(res.status).toBe(StatusCodes.BAD_REQUEST);
   });
 
   it('list user tasks', async () => {
